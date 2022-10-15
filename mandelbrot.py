@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from numpy import newaxis
 
-warning.filterwarnings("ignore") # to suppress square overflow warnings
+warnings.filterwarnings("ignore") # to suppress square overflow warnings
 
 def mandelbrot(N_max, threshold, n):
     """
@@ -26,10 +26,10 @@ def mandelbrot(N_max, threshold, n):
     c = x[:,newaxis] +1j*y[newaxis,:]
 
     # Store the c grid in z
-    z = c
+    z = 0
 
     # Apply the MandelBrot iteration for N_max steps
-    for j in range(N_max):
+    for _ in range(N_max):
         z = z**2 + c
     
     # Create a 3D boolean matrix mask, which checks if |z| < threshold
@@ -40,8 +40,7 @@ def mandelbrot(N_max, threshold, n):
 mask = mandelbrot(N_max=50, threshold=50., n=600)
 
 # Plotting and saving the figure as mandelbrot.png
-plt.imshow(masj.T,extent=[-2,1,-1.5,1.5])
+plt.imshow(mask.T,extent=[-2,1,-1.5,1.5])
 plt.gray()
-plt.savefig("mandelbrot.png")
-
-# Question 1.2
+plt.show()
+plt.savefig("mandelbrot.png",dpi=300)
